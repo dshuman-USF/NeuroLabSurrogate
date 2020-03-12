@@ -1,0 +1,8 @@
+#!/bin/sh
+
+for f in $* ; do
+    id=`echo $f | perl -pe 's/.*-(\d+)-0.(\d).gdf/$1$2/'`
+    grep '   1' $f | cut -b 5- | sort -un > all$id
+    unpin < all$id > lodif$id
+    printf "%-37s %13f\n" "$f:" `gammafit_search $id`
+done

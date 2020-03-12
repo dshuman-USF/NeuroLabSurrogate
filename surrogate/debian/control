@@ -1,0 +1,31 @@
+Source: surrogate
+Section: local
+Priority: extra
+Maintainer: Russell O'Connor <roconnor@health.usf.edu>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev,
+  x11proto-core-dev,
+  libx11-dev,
+  perl-modules,
+  libsigsegv2,
+  mime-support,
+  gawk,
+  libgsl-dev,
+  libjudy-dev,
+  libc6-dev
+Standards-Version: 3.9.4
+Homepage: cisc3
+#Vcs-Git: git://git.debian.org/collab-maint/surrogate.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/surrogate.git;a=summary
+
+Package: surrogate
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: surrogate spike train generator
+ The primary program in this package is edt_surrogate, which takes a
+ .bdt or .edt spike file as input and generates multiple .bdt or .edt
+ files as outputs with spike trains similar to the ones in the input
+ spike file, using the algorithm described in "An Accurate Measure of
+ the Instantaneous Discharge Probability, with Application to Unitary
+ Joint-Event Analysis" (Quentin Pauluis, Stuart N. Baker Neural
+ Computation 2000 12:3, 647-666).  The user can select a subset of
+ channels in the input file to be included in the output file.

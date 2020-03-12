@@ -1,0 +1,375 @@
+2017-10-11  Dale Shuman  <dshuman@cisc1>
+
+	* configure.ac: bump up to 1.0.12.
+
+2017-09-29  Dale Shuman  <dshuman@cisc1>
+
+	* edt_surrogate.c: line 193, add in fflush(stdout) to appease the
+	gravity_gui program.
+
+2017-08-17  dshuman@health.usf.edu
+
+	* configure.ac: New libgsl-dev breaks package. Rebuild. No code changes.
+	* debian/control: Remove hardening-wrapper
+	* configure.ac: Bump to 1.0.11
+
+2016-01-06  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 1.0.10, rebuild with libgsl2
+
+2014-03-20  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 1.0.9
+
+	* debian/rules (override_dh_auto_configure)
+	(override_dh_usrlocal): add options to install in /usr/local.
+	Fixes installation in the wrong place.
+
+2014-02-12  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* ../xanalysis/gammafit_search_nopin.c (plot_best):
+	* ../xanalysis/edt.c (read_edt): check return values of asprint,
+	etc.  Silences compiler warnings when using DEB_BULD_HARDENING=1
+
+	* configure.ac: bump rev to 1.0.8
+
+	* Makefile.am (LDADD): delete unused -lrt
+
+	* repat.c (repat):
+	* eval.c (repat): delete broken and redundant memset
+
+	* eval.c (repat, main, do_test, plot, do_x_test_orig, do_x_test)
+	(do_test_2d, plot2d, do_x_test_2d):
+	* explain.c (paint):
+	* edt.c (read_edt):
+	* edt_surrogate.c (main):
+	* read_array.c (read_array): check return value of asprint, etc.
+	Silences compiler warnings when using DEB_BULD_HARDENING=1
+
+	* Makefile.am (EXTRA_DIST): add debian
+	(install-exec-hook): delete
+
+2012-08-10  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 1.0.7
+
+	* edt.c (write_edt): exit loop if we reach the end of the spike
+	list, and warn that code 21 follows all spikes.  Fixes segfault.
+
+	* tools.c (surrogate): check st.N, not rf.N, to see if st.T needs
+	to be enlarged.  Fixes segfault.
+
+2012-01-24  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* ../xanalysis/tools.c (recip_isi): look for a file named
+	DONT_LOWPASS_FILTER_SURROGATES and disable lowpass for surrogate
+	generation if it can be opened for read.
+
+2011-04-20  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 1.0.6
+
+	* Makefile.am (LDADD): add -lm.  Fixes failure to compile with
+	latest gcc.
+
+2010-12-02  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* ../xanalysis/tools.c (surrogate): free and malloc instead of
+	realloc.  Fixes running out of memory.
+
+2010-11-18  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* ../xanalysis/edt.c (read_edt): add file & line to error message
+
+2010-10-30  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* ../xanalysis/edt.h: add include guard so xanalysis pairloop.h
+	can include edt.h
+
+2010-09-30  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* tools.h:
+	* tools.c (seed_rng, init_rng): add routine to seed rng
+
+2010-09-24  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* tools.h (struct): put N first in SpikeTrain and RateFunc
+	structs, for potential reading in from disk.
+
+2010-05-13  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* miura.c (main): add id to miura output
+
+2009-09-16  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 1.0.5
+
+	* edt.c (write_edt): copy 21 and 22 codes from gdt file when doing
+	a gdt, instead of setting them from the spike times.  Fixes
+	spurious gravity results.
+
+2009-09-08  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 1.0.4
+
+	* edt_surrogate.c (main): generate the surrogates for one file at
+	a time.  Fixes out-of-memory error when generating 10000
+	surrogates.
+
+	* edt.c (write_edt): delete "sorting" and "writing" messages
+	(write_edt): close file after writing.  Fixes error after writing
+	1022 files.
+
+2009-09-04  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 1.0.3
+
+	* edt_surrogate.c (main): don't multiply allocate by
+	surrogate_count twice.  Fixes segfault with large surrogate
+	counts.
+
+2009-07-08  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 1.0.2
+
+	* edt_surrogate.c (parse_args): set state to KEEP, not EXCLUDE,
+	for keep arg.  Fixes kept id's not being kept.
+
+2009-01-15  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* gammafit_search.c (get_next_segcnt): allow segcnt to be as large
+	as spikecount + 1, instead of spikecount.  Fixes BUG report in
+	scope for spiketrain with two spikes.
+
+2008-08-18  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* Makefile.am (bin_PROGRAMS): add check_surr
+	(checksurr_SOURCES): added
+
+	* configure.ac: AM_PROG_CC_C_O for compiling `explain.c' with
+	per-target flags
+
+2008-08-12  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* Makefile.am (miura_SOURCES): new program to just calculate the
+	gamma shape of the ISI distribution for each spike train in an edt
+	file using Miura's algorithm.
+
+	* edt_surrogate.c (main): show package version when run.
+
+2008-10-30  Russell O'Connor  <roconnor@health.usf.edu>
+
+      * configure.ac: bump rev to 1.0.1
+
+      * edt_surrogate.c (main): if gamma is less than .5, round up to 1,
+      not down to 0.
+
+
+2008-01-02  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 1.0
+
+2007-12-13  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* README: describe edt_surrogate algorithm
+
+	* edt_surrogate.c (main): add the Pauluis and Baker surrogate
+	code, using calls to functions from tools.c
+
+	* edt_surrogate.c: include "tools.h"
+
+	* Makefile.am (edt_surrogate_SOURCES): add tools.c and tools.h
+
+	* edt_surrogate.c (main): move the code that begins with
+	"memcpy (&sur, edt, sizeof sur);" and end with "format =
+	"%s_%02d.%s";}" above the "use_smoothed_rate =" line so the
+	Pauluis surrogate code can go between them.  This change by itself
+	should make no difference.
+
+2007-11-19  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* gammafit_search_nopin.c (get_result): comment out debug printf
+
+	* gammafit_search.c (plot_best): initialize max_d_loc to silence
+	compiler.
+	(gammafit_search): comment out debug printf
+
+2007-11-15  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* edt.c (read_edt): set is_gdf true and has_header false iff the
+	extension is .gdf.
+
+	* edt.h (struct): add "bool is_gdf" to Edt struct.
+
+	* gammafit_search.c (gammafit_search): save inferred rate if
+	EDT_SURROGATE_RATE is set.
+	(write_best): routine to write rate data to "rate.tmp"
+
+2007-11-06  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* unpin_main.c (main): don't generate lodif for NOPIN variant
+
+	* gammafit_search_main.c (main): don't read lodif for NOPIN
+	variant
+
+2007-10-15  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* gammafit_search_nopin.c: delete extra definition of malloc_debug
+	now that util.c is included.
+
+	* Makefile.am (unpin_SOURCES, explain_SOURCES)
+	(surrogate_SOURCES, edt_surrogate_SOURCES)
+	(gammafit_search_SOURCES): add unpin_nopin.c and/or
+	gammafit_search_nopin.c
+	(gammafit_search_SOURCES, surrogate_SOURCES)
+	(edt_surrogate_SOURCES): add util.c util.h
+
+	* unpin_nopin.c: 
+	* gammafit_search_nopin.c: alternate versions of gammafit_search,
+	gammafit, set_preserve_t_est, get_t_est, and nopin that implement
+	a longest-line-between-limits approximation of the cumulative
+	firing rate for use as the smoothed firing rate.  These files can
+	be included in the compilation along with the originals, and these
+	versions are selected by adding -DNOPIN to CFLAGS
+
+	* gammafit_search.c (gammafit_search): plot the surrogate if
+	EDT_SURROGATE_PLOT is set in the environment.
+
+2007-07-23  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* edt_surrogate.c (main): use the smoothed rate from get_gamma in
+	gen_control if SURROGATE_USE_SMOOTHED_RATE is set in the
+	environment.
+
+	* gammafit_search.h: 
+	* gammafit_search.c (gammafit_search, get_t_est)
+	(set_preserve_t_est): 
+	provide a way to get the smoothed firing rate estimate for use in
+	gen_control.
+	
+	* gen_control.h: 
+	* gen_control.c (gen_control, put_t_est, clear_t_est)
+	(set_use_smoothed_rate): 
+	provide option to used a smoothed firing rate estimate (from
+	get_gamma) instead of reciprocal ISI.
+
+	* gammafit_search.c (unpin_gammafit): move "go to segcnt" code to
+	a subroutine.
+	(goto_segcnt): new subroutine.
+
+2007-04-16  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* gen_control.h: add declaration of init_control.
+
+	* gen_control.c (init_control): new routine with initialization so
+	it can be called from outside.
+	(gen_control): call init_control instead of initializing directly.
+
+2007-02-15  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* gammafit_search.c (unpin_gammafit): use sumsq/N instead of
+	sumsq/(N - 1) for variance.
+
+2007-02-12  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* gammafit_search.c (unpin_gammafit): delete unused variables s
+	and t.
+
+2007-01-17  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 0.9
+
+	* configure.ac: find X paths
+
+	* Makefile.am (explain_CFLAGS, explain_LDADD): add X paths
+
+	* explain.c (main): provide option to set spike_count on the
+	command line
+
+2007-01-10  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* Makefile.am (explain_LDADD): add LIBOBJS
+
+	* configure.ac: bump rev tp 0.8
+
+	* explain.c: include config.h, asprintf declaration
+	change name of "time" array to "stim"
+
+	* explain.c (get_t_est): added explain program
+
+2007-01-05  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 0.7
+
+	* gen_control.c (gen_control_from_rate,gen_control,gen_control.h):
+	Don't use starting time (tsum), it's already accounted for.  Fixes
+	lack of output on files with high start times.
+
+2006-11-02  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* gammafit_search.c (unpin_gammafit): ignore MAXITER errors from
+	gsl_cdf_gamma_P
+
+2006-10-13  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* gen_control.c (insert,interp1):
+	* gen_control.h (insert,interp1,gen_control_from_rate): make
+	insert, interp1 and gen_control_from_rate accessible for use by
+	scope.
+
+2006-10-11  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* gen_control.c (gen_control_from_rate): split out
+	gen_control_from_rate from gen_control, for use by scope.
+
+2006-09-28  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* configure.ac: bump rev to 0.6
+
+	* Makefile.am (LDADD): put LIBOBJS in front of libraries so they
+	override system versions (getline on RT11).  Fixes segfault on
+	RT11.
+
+	* configure.ac: bump rev to 0.5
+
+	* edt.c (read_edt): change size for calloc of digital[id] from
+	*digital to *digital[id].  Fixed segfault on risc2.
+
+	* configure.ac: bump rev to 0.4
+
+	* edt.h (struct Edt): 
+	* edt.c (read_edt): handle arbitrary codelen, timelen and
+	headerless gdt.
+
+	* edt_surrogate.c (main): remove debug code (%a version of g)
+
+	* configure.ac: bump rev to 0.3
+
+2006-09-26  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* edt.h: add gdt support
+	* edt.c: add gdt support
+
+	* configure.ac: deal with asprintf and getline for HP-UX
+
+	* edt_surrogate.c (parse_args): add option to specify rng seed.
+
+	* gen_control.c (gen_control): add 0 element to cumspkcnt when
+	n==1, not when T(2)=.5.  Fixes SIGSEGV.
+	(gen_control): print out seed used for rng.
+	(gen_control): earliest time in cumspkcnt must be >= 0.  Fixes
+	SIGSEGV.
+	
+
+2006-09-25  Russell O'Connor  <roconnor@health.usf.edu>
+
+	* unpin.c: 
+	* gen_control.c: 
+	* gammafit_search.c: arrange for Judy arrays to work on 32-bit
+	machines 
+
+	* configure.ac: bump rev to 0.2
+
+	* add edt_surrogate
+	
+

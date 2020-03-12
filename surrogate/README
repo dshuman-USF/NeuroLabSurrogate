@@ -1,0 +1,26 @@
+Thu Dec 13 14:10:45 EST 2007
+
+edt_surrogate Version 0.9b
+
+The surrogates are generated using the algorithm described in
+
+  An Accurate Measure of the Instantaneous Discharge Probability, with
+  Application to Unitary Joint-Event Analysis
+  Quentin Pauluis, Stuart N. Baker
+  Neural Computation 2000 12:3, 647-666
+
+Pauluis does not describe a method for determining the shape parameter
+for the gamma distribution used in generating the surrogates.  For
+that we use the method described in
+
+  Estimating Spiking Irregularities Under Changing Environments
+  Keiji Miura, Masato Okada, Shun-ichi Amari
+  Neural Computation 2006 18:10, 2359-2386 
+
+In Pauluis' algorithm, the firing rate is smoothed by convolution with
+a gaussian.  He does not describe the padding method used in the
+convolution.  In order to preserve the expected number of spikes in
+the interval (i.e., the integral of the firing rate) we use mirror
+padding.  Zero padding would reduce the expected number of spikes.
+
+
